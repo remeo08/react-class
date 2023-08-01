@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-const DiaryEditor = () => {
+const DiaryEditor = ({ onCreate }) => {
     const authorInput = useRef();
     const contentInput = useRef();
 
@@ -29,7 +29,16 @@ const DiaryEditor = () => {
             contentInput.current.focus();
             return;
         }
+
+        onCreate(state.author, state.content, state.emotion);
         alert('오늘의 일기가 저장되었습니다.');
+
+        // DiaryList로 저장에 성공한 일기폼 내용은 초기화
+        setState({
+            author: '',
+            content: '',
+            emotion: 1,
+        });
     };
 
     return (
